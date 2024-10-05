@@ -1,0 +1,45 @@
+def reposition_object(image_path, final_mask, shift_x, shift_y, output_path):
+    """
+    Repositions the object in the image based on the given mask and pixel shift values.
+    """
+    # Load the image
+    image = np.array(Image.open(image_path).convert("RGB"))
+
+    # Ensure final_mask is a valid NumPy array
+    if not isinstance(final_mask, np.ndarray):
+        print("Error: final_mask is not a valid NumPy array.")
+        return
+
+    # Extract the object from the image using the mask
+    object_image = cv2.bitwise_and(image, image, mask=final_mask.astype(np.uint8))
+
+    # Create a blank background to place the object on
+    background = np.zeros_like(image)
+
+    # Define the translation matrix for repositioning
+    translation_matrix = np.float32([[1, 0, shift_x], [0, 1, shift_y]])
+
+    # Translate the object in the image
+    shifted_object = cv2.warpAffine(object_image, translation_matrix, (image.shape[1], image.shape[0]))
+
+    # Remove the object from its original position by masking it out
+    background[final_mask == 255] = 0  # Setting masked area in the background to black
+
+    # Add the shifted object to the background
+    final_image = cv2.add(background, shifted_object)
+
+    # Convert the result back to a PIL image and save it
+    output_image = Image.fromarray(final_image)
+    output_image.save(output_path)
+    print(f"Repositioned image saved to '{output_path}'.")
+
+# Run the segmentation and get the final mask
+#final_mask = main('/kaggle/input/more-animals-images/cat-and-dog-sitting-together-against-white-background-E7G6TY.jpg', 'cat', 'output_image1.png')
+
+# Check if final_mask is generated successfully
+if final_mask is not None:
+    shift_x = 50  # Shift right by 50 pixels
+    shift_y = -20  # Shift up by 20 pixels
+    reposition_object('/kaggle/input/more-animals-images/cat-and-dog-sitting-together-against-white-background-E7G6TY.jpg', final_mask, shift_x, shift_y, 'repositioned_output_image.png')
+else:
+    print("Segmentation failed. Could not generate final mask.")

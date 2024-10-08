@@ -2,6 +2,9 @@
 
 This repository contains code for object segmentation and repositioning within images. The code leverages the Segment Anything Model (SAM) for segmentation and OpenAI's CLIP model for object classification. The project's primary goal is to identify a specific object in an image, generate a segmentation mask, and reposition the object based on user-defined pixel shifts.
 
+
+![image](https://github.com/user-attachments/assets/785d896c-ed74-414a-aac1-66842377f0b7)
+
 This project provides the following functionalities:
 
 Object Identification: Uses the CLIP model to match an object class (e.g., "cat") with objects in the input image.

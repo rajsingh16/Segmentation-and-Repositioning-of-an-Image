@@ -7,10 +7,10 @@ This repository contains code for object segmentation and repositioning within i
 
 This project provides the following functionalities:
 
-Object Identification: Uses the CLIP model to match an object class (e.g., "cat") with objects in the input image.
+Object Identification: Uses the CLIP model to match an object class (e.g., "bag", "Wall hanging", "stool") with objects in the input image.
 Segmentation Mask Generation: Uses the Segment Anything Model (SAM) to generate segmentation masks for all objects in the image.
 Repositioning Objects: Moves the segmented object to a new location within the image based on user-specified pixel shifts.
-Dependencies
+#Dependencies
 Python 3.7+
 PyTorch
 OpenAI's CLIP
@@ -70,23 +70,24 @@ Example
 Here’s a quick example of how to run the code:
 
 Python
-Copy code
 # Example to identify and reposition a 'cat' in an image
 final_mask = main('cat-and-dog-sitting. jpg', 'cat', 'output_image1.png')
 
+# Task 2
 # Reposition the object if segmentation is successful
+
 if final_mask is not None:
     reposition_object('cat-and-dog-sitting.jpg', final_mask, shift_x=50, shift_y=-20, output_path='repositioned_output_image.png')
 Troubleshooting
 Common Issues:
-Model Checkpoint Not Found: Ensure you have downloaded the SAM model checkpoint and placed it in the correct directory.
+Model Checkpoint Not Found: Please make sure you have downloaded the SAM model checkpoint and placed it in the right directory.
 
-CUDA Errors: If you happen to encounter CUDA errors, please check that your machine has a compatible GPU and PyTorch is installed with CUDA support. If not, the code will default to CPU.
+CUDA Errors: If you encounter CUDA errors, please check that your machine has a compatible GPU and PyTorch is installed with CUDA support. If not, the code will default to CPU.
 
-Incorrect Object Class: If CLIP fails to identify the object, ensure that the object class label provided (e.g., "cat") is appropriate for the image.
+Incorrect Object Class: If CLIP fails to identify the object, ensure that the object class label provided  is appropriate for the image.
 
 Debugging:
-If segmentation or object repositioning fails, ensure that the segmentation mask is generated successfully by adding debug statements in the main function to verify the mask generation.
+If segmentation or object repositioning doesn't work, please make sure that the segmentation mask is generated successfully by adding debug statements in the main function to verify the mask generation.
 
 Contributing
 Contributions are welcome! Please submit a pull request or open an issue for any bugs or feature requests.

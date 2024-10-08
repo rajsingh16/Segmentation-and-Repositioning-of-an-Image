@@ -88,9 +88,12 @@ Incorrect Object Class: If CLIP fails to identify the object, ensure that the ob
 
 Debugging:
 If segmentation or object repositioning doesn't work, please make sure that the segmentation mask is generated successfully by adding debug statements in the main function to verify the mask generation.
-
 Contributing
 Contributions are welcome! Please submit a pull request or open an issue for any bugs or feature requests.
 
 License
 This project is licensed under the MIT License.
+
+
+#output
+![image](https://github.com/user-attachments/assets/fc837470-bd46-488c-b65f-e65230f70195)
